@@ -28,7 +28,6 @@ export default function VoteModal({ isOpen, onClose, candidate }: any) {
   const onSubmitVote = async () => {
     if (!isError) {
       const response = await VoteAPI.vote(nationalId, candidate.id);
-      console.log("res", response);
       if (response?.data.status === "ok") {
         onClose();
         return toast({
