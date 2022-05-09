@@ -59,39 +59,27 @@ export default function Candidate() {
     const url = window.URL.createObjectURL(new Blob([response?.data]));
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "election-result.csv"); //or any other extension
+    link.setAttribute("download", "election-result.csv");
     document.body.appendChild(link);
     link.click();
   };
 
-  const socketConnection = () => {
-    const socket = io(`${process.env.REACT_APP_API_ENDPOINT}`, {
-      transports: ["websocket"],
-    });
-    socket.on("new-vote", (result) => {
-      console.log(result);
-      setCandidates(
-        candidates.map((candidate, index) => {
-          if (candidate.id === result.id) {
-            return {
-              ...candidate,
-              votedCount: result.votedCount,
-            };
-          }
-          return candidate;
-        })
-      );
-    });
-  };
-
   useEffect(() => {
     getElectionStatus();
-    socketConnection();
+    (() => {
+      const socket = io(`${process.env.REACT_APP_API_ENDPOINT}`, {
+        transports: ["websocket"],
+      });
+      socket.on("new-vote", (result) => {
+        console.log(result);
+        getElectionResult();
+      });
+    })();
     getElectionResult();
   }, []);
   return (
     <Box>
-      {!electionStatus && getMaxVotedCandidate()?.votedCount !== 0 && (
+      {electionStatus === false && getMaxVotedCandidate()?.votedCount !== 0 && (
         <Box p={5} fontWeight="semibold" fontSize={"3xl"}>
           <Center>
             <Text>
