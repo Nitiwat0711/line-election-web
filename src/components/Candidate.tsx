@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Wrap, WrapItem, Box, Center, Text, Button } from "@chakra-ui/react";
+import {
+  Wrap,
+  WrapItem,
+  Box,
+  Center,
+  Text,
+  Button,
+  Skeleton,
+} from "@chakra-ui/react";
 import CandidateCard from "./cards/CandidateCard";
 import { CandidateAPI } from "../apis/candidate";
 import { CandidateModel } from "../model/candidate";
@@ -95,17 +103,70 @@ export default function Candidate() {
         </Box>
       )}
       <Wrap p={5} justify="center" spacingX="2%" spacingY={"3%"}>
-        {candidates.map(
-          (candidate: CandidateModel.returnValue, index: number) => {
-            return (
-              <WrapItem maxW={"100%"} key={index}>
-                <CandidateCard
-                  candidate={candidate}
-                  voteEnable={electionStatus ? true : false}
-                />
-              </WrapItem>
-            );
-          }
+        {candidates.length ? (
+          candidates.map(
+            (candidate: CandidateModel.returnValue, index: number) => {
+              return (
+                <WrapItem maxW={"100%"} key={index}>
+                  <CandidateCard
+                    candidate={candidate}
+                    voteEnable={electionStatus ? true : false}
+                  />
+                </WrapItem>
+              );
+            }
+          )
+        ) : (
+          <>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+            <WrapItem maxW={"100%"}>
+              <Skeleton w={"325px"} h={"500px"} borderRadius="lg">
+                <div>contents wrapped</div>
+                <div>won't be visible</div>
+              </Skeleton>
+            </WrapItem>
+          </>
         )}
       </Wrap>
     </Box>
